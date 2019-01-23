@@ -421,8 +421,9 @@ def main():
         except:
             jsono['profile_image_url_https'] = ''
 
-    for u in user_info.entities['url']['urls']:
-        cprint("    url             : \033[1m%s\033[0m" % u['expanded_url'])
+    if user_info.entities.has_key('url'):
+        for u in user_info.entities['url']['urls']:
+            cprint("    url             : \033[1m%s\033[0m" % u['expanded_url'])
 
     cprint("    description     : \033[1m%s\033[0m" % user_info.description)
     cprint("    statuses_count  : \033[1m%s\033[0m" % user_info.statuses_count)
@@ -559,3 +560,4 @@ if __name__ == '__main__':
         cprint("[\033[91m!\033[0m] Twitter error: %s" % e)
     except Exception as e:
         cprint("[\033[91m!\033[0m] Error: %s" % e)
+        cprint(str(type(e)))
